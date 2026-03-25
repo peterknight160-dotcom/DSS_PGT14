@@ -1,4 +1,3 @@
-// Remember to run "npm install pg-promise" before starting up the docker apps 
 const express = require('express')
 const app = express();
 const port = 3000;
@@ -50,58 +49,17 @@ app.post('/',  async (req, res) => {
     // Get username and password entered from user
     var username = req.body.username_input;
     var password = req.body.password_input;
-    let login_flag =99;
+ 
 
    const login_check = await  db.one('SELECT check_user_login ($1,$2, $3, $4) as check', [username, password , 'localhost','127.0.0.1']) ;
   
 
-     if (login_check.check == 0) {
-         login_flag = 0 ;
-        
-     }
-     else {
-        login_flag=1;
-     }
-    
   
- 
 
- 
-   /*  // Currently only "username" is a valid username
-    if(username !== "username") {
 
-        // Update login_attempt with credentials used to log in
-        let login_attempt = {"username" : username, "password" : password};
-        let data = JSON.stringify(login_attempt);
-        fs.writeFileSync(__dirname + '/public/json/login_attempt.json', data);
-
-        // Redirect back to login page
-        res.sendFile(__dirname + '/public/html/login.html', (err) => {
-            if (err){
-                console.log(err);
-            }
-        });
-    }
- 
-    // Currently only "password" is a valid password
-    if(password !== "password") {
-
-        // Update login_attempt with credentials used to log in
-        let login_attempt = {"username" : username, "password" : password};
-        let data = JSON.stringify(login_attempt);
-        fs.writeFileSync(__dirname + '/public/json/login_attempt.json', data);
-
-        // Redirect back to login page
-        res.sendFile(__dirname + '/public/html/login.html', (err) => {
-            if (err){
-                console.log(err);
-            }
-        });
-    } */
-console.log (' Do I get here - line 95 - data is ' + login_flag);
     // Valid username and password both entered together
     
-    if(login_flag == 0 ) {
+    if(login_check.check == 0 ) {
   // Update login_attempt with credentials
         let login_attempt = {"username" : username, "password" : password};
         let data = JSON.stringify(login_attempt);
@@ -118,11 +76,17 @@ console.log(' Do I get here - line 113 ' +__dirname + '/public/html/index.html')
                 console.log(err);
             }
         })
-   console.log (' Do I get here - line 120');
 
-
-        
+    
+    } else {
+        // Resend the failed login page
+        res.sendFile(__dirname + '/public/html/login_failed.html', (err) => {
+        if (err){
+            console.log(err);
+        }
+    })
     }
+
 });
 
 // Make a post POST request
