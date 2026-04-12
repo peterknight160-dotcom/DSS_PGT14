@@ -281,10 +281,8 @@ app.post('/makepost', authenticateUser, async (req, res) => {
   fs.writeFileSync(__dirname + '/public/json/posts.json', JSON.stringify(posts));
 
   // Write post to database,
-  const query_post = 'with user_w as (select id as userid from blogapp_admin.user_vw  where username=$1) \
-           insert into posts ( userid, title, content )   select userid , $2 as title, $3 as content from user_w;';
-
-  await db_posts.none(query_post, [req.session.user.username, clean_title, clean_content]);
+  
+  await db_posts.proc('insert_post', [req.session.user.username, clean_title, clean_content]);
 
 
 
