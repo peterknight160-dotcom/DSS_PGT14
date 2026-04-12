@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Executive Insights — Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="/imgs/foodie.ico">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+        <script src="../js/register.js" defer></script>
+        <link rel="stylesheet" href="/css/login-style.css">
+    </head>
+    <body>
+        <!-- Left decorative panel -->
+        <div class="left-panel">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <rect x="1" y="1" width="7" height="7" stroke="#7a9cc4" stroke-width="1"/>
+                        <rect x="10" y="1" width="7" height="7" stroke="#7a9cc4" stroke-width="1"/>
+                        <rect x="1" y="10" width="7" height="7" stroke="#7a9cc4" stroke-width="1"/>
+                        <rect x="10" y="10" width="7" height="7" fill="#7a9cc4"/>
+                    </svg>
+                </div>
+                <span class="brand-name">Executive Insights</span>
+            </div>
+
+            <div class="left-content">
+                <h1>Where leadership<br>meets <em>perspective.</em></h1>
+                <p>A private platform for our executives to share strategic thinking, industry analysis, and organisational vision.</p>
+            </div>
+
+            <div class="quotes-strip">
+                <div class="quote-item">
+                    <div class="quote-avatar">JH</div>
+                    <div>
+                        <div class="quote-text">"The best decisions come from the clearest thinking."</div>
+                        <div class="quote-author">James Hartley · Chief Executive</div>
+                    </div>
+                </div>
+                <div class="quote-item">
+                    <div class="quote-avatar">SR</div>
+                    <div>
+                        <div class="quote-text">"Sharing knowledge is how we multiply our impact."</div>
+                        <div class="quote-author">Sophie Reid · Chief Strategy Officer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right login panel -->
+        <div class="right-panel">
+            <div class="login-label">Member access</div>
+            <div class="login-title">Welcome back</div>
+            <div class="login-sub">Sign in to access the executive insights portal.</div>
+
+            <!-- Generic error — never reveals which field is wrong -->
+            <div class="error-msg" id="error_msg" role="alert">
+                Invalid username or password. Please try again.
+            </div>
+
+            <!--
+                Security notes:
+                - autocomplete="off" prevents browsers caching credentials
+                - maxlength limits prevent oversized payload attacks
+                - novalidate means validation is handled server-side only
+                - name attributes kept identical to original for backend compatibility
+            -->
+<form method="post" action="/register" id="register_form" autocomplete="off" novalidate>
+
+                <!-- CSRF token: uncomment when csrf protection is added to app.js -->
+                <!-- <input type="hidden" name="_csrf" value="<%= csrfToken %>"> -->
+
+                <div class="field">
+                    <label for="username_input">Username</label>
+                    <input
+                        type="text"
+                        id="username_input"
+                        name="username_input"
+                        placeholder="Enter a username"
+                        maxlength="50"
+                        required
+                        spellcheck="false"
+                        autocorrect="off"
+                        autocapitalize="none"
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="password_input">Password</label>
+                    <input
+                        type="password"
+                        id="password_input"
+                        name="password_input"
+                        placeholder="••••••••"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <button type="submit" id="register_btn" class="submit-btn">Register</button>
+            </form>
+
+            <div class="footer-note">
+            </div>
+        </div>
+
+    </body>
+</html>
